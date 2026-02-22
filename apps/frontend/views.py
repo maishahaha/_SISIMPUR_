@@ -138,12 +138,10 @@ def backend_root(request):
         "message": "SISIMPUR Backend API",
         "version": "1.0.0",
         "status": "running",
-        "api_versions": {
-            "v1": {"path": "/api/docs", "status": "running", "docs": "/docs"},
-        },
         "docs": {
-            "main": "/docs",
-            "redoc": "/redoc",
+            "swagger": "/api/docs/",
+            "redoc": "/api/redoc/",
+            "admin": "/api/admin/docs/",
         },
     }
     return JsonResponse(data, status=200)

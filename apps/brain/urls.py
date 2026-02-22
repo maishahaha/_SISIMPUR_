@@ -18,7 +18,5 @@ urlpatterns = [
     path('jobs/<int:job_id>/download/', api_views.download_results, name='download_results'),
     path('jobs/<int:job_id>/delete/', api_views.delete_job, name='delete_job'),
 
-    # Development/Testing endpoints (JSON responses)
-    path('dev/test/', api_views.dev_test_processing, name='dev_test'),
-    path('dev/jobs/', api_views.dev_list_jobs, name='dev_jobs'),
 ]
+

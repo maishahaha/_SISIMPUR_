@@ -75,13 +75,13 @@ def delete_job(request, job_id):
     return brain_views.delete_job(request._request, job_id)
 
 
-@swagger_auto_schema(method="get", tags=["Brain - Development"], operation_summary="Development test processing")
+@swagger_auto_schema(method="get", tags=["Admin - Development"], operation_summary="[Admin] Test document processing")
 @api_view(["GET"])
 def dev_test_processing(request):
     return brain_views.dev_test_processing(request._request)
 
 
-@swagger_auto_schema(method="get", tags=["Brain - Development"], operation_summary="Development list jobs")
+@swagger_auto_schema(method="get", tags=["Admin - Development"], operation_summary="[Admin] List all jobs")
 @api_view(["GET"])
 def dev_list_jobs(request):
     return brain_views.dev_list_jobs(request._request)
