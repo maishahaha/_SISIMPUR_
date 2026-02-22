@@ -134,4 +134,20 @@ def health_check(request):
 
 def backend_root(request):
     """Return a simple message at the Django root to indicate the backend is running."""
-    return HttpResponse("Backend server running", status=200)
+    data = {
+        "message": "Legal AI Backend API",
+        "version": "2.0.0",
+        "status": "running",
+        "api_versions": {
+            "v1": {"path": "/api/v1", "status": "deprecated", "docs": "/docs"},
+            "v2": {"path": "/api/v2", "status": "recommended", "docs": "/v2/docs"},
+        },
+        "docs": {
+            "main": "/docs",
+            "v2_only": "/v2/docs",
+            "admin_v1": "/admin/docs",
+            "admin_v2": "/admin-v2/docs",
+            "redoc": "/redoc",
+        },
+    }
+    return JsonResponse(data, status=200)
