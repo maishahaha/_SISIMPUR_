@@ -91,7 +91,6 @@ def my_quizzes(request):
     }
     return render(request, "my_quizzes.html", context)
 
-@login_required(login_url='auth:signupin')
 def quiz_results(request, job_id):
     """
     Render the quiz results page for a specific job
@@ -959,7 +958,6 @@ def complete_flashcard(request, session_id):
 # SHORT ANSWER EVALUATION API
 # ============================================================================
 
-@login_required(login_url='auth:signupin')
 @require_http_methods(["POST"])
 @csrf_exempt
 def evaluate_short_answer(request):

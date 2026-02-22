@@ -30,8 +30,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("healthz/", health_check, name="health_check"),  # Health check endpoint
-    path("health/", health_check, name="health_check_alt"),  # Alternative health check
-    path("ping/", health_check, name="ping"),  # Simple ping endpoint
     path("api/docs/", schema_view.with_ui("swagger", cache_timeout=0), name="swagger-ui"),
     path("api/redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="redoc-ui"),
     path("api/swagger.json", schema_view.without_ui(cache_timeout=0), name="swagger-json"),

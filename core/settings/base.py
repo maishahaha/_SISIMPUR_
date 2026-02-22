@@ -224,6 +224,10 @@ OTP_CONFIG = {
 GOOGLE_OAUTH2_CLIENT_ID = os.getenv("GOOGLE_OAUTH2_CLIENT_ID")
 GOOGLE_OAUTH2_CLIENT_SECRET = os.getenv("GOOGLE_OAUTH2_CLIENT_SECRET")
 
+# Redirect unauthenticated Django session requests to docs instead of the
+# non-existent /accounts/login/ which would 404.
+LOGIN_URL = "/api/docs/"
+
 # ---------------------------------------------------------------------------
 # CORS / CSRF / Sessions  (extended in dev/prod)
 # ---------------------------------------------------------------------------
@@ -261,7 +265,7 @@ LOGGING = {
 # ---------------------------------------------------------------------------
 SWAGGER_SETTINGS = {
     "DEFAULT_INFO": "core.urls.schema_view",
-    "USE_SESSION_AUTH": True,
+    "USE_SESSION_AUTH": False,  # Prevents Swagger from redirecting to /accounts/login/
     "TAGS_SORTER": "alpha",
     "OPERATIONS_SORTER": "alpha",
     "DOC_EXPANSION": "list",

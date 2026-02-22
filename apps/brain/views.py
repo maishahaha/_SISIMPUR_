@@ -1,6 +1,4 @@
 from django.shortcuts import get_object_or_404
-# DEV ONLY: Bypass auth — revert before production
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -18,7 +16,6 @@ from .processor import APIDocumentProcessor
 logger = logging.getLogger("sisimpur.brain.views")
 
 
-@login_required
 @require_http_methods(["POST"])
 @csrf_exempt
 def process_document(request):
@@ -177,7 +174,6 @@ def store_evaluation_result(request):
     return dashboard_store_evaluation_result(request)
 
 
-@login_required
 @require_http_methods(["POST"])
 @csrf_exempt
 def process_text(request):
@@ -281,7 +277,6 @@ def process_text(request):
         )
 
 
-@login_required
 def get_job_status(request, job_id):
     """
     Get the status of a processing job.
@@ -317,7 +312,6 @@ def get_job_status(request, job_id):
         )
 
 
-@login_required
 def get_job_results(request, job_id):
     """
     Get the Q&A results for a completed job.
@@ -352,7 +346,6 @@ def get_job_results(request, job_id):
         )
 
 
-@login_required
 def download_results(request, job_id):
     """
     Download Q&A results as JSON file.
@@ -397,7 +390,6 @@ def download_results(request, job_id):
         )
 
 
-@login_required
 def list_jobs(request):
     """
     List all processing jobs for the current user.
@@ -438,7 +430,6 @@ def list_jobs(request):
 
 
 # Development/Testing endpoints
-@login_required
 def dev_test_processing(request):
     """
     Development endpoint for quick testing (JSON response)
@@ -498,7 +489,6 @@ def dev_test_processing(request):
         return JsonResponse({"success": False, "error": str(e)}, status=500)
 
 
-@login_required
 def dev_list_jobs(request):
     """
     Development endpoint to list jobs as JSON
@@ -531,7 +521,6 @@ def dev_list_jobs(request):
     return JsonResponse({"success": True, "jobs": jobs_data, "total": jobs.count()})
 
 
-@login_required
 @require_http_methods(["DELETE"])
 def delete_job(request, job_id):
     """
