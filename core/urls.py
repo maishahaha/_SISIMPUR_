@@ -37,7 +37,6 @@ urlpatterns = [
     path("api/swagger.json", schema_view.without_ui(cache_timeout=0), name="swagger-json"),
     path("", include("apps.frontend.urls")),
     path("auth/", include("apps.authentication.urls")),
-    path("app/", include("apps.dashboard.urls")),
     path("api/auth/", include("apps.authentication.api_urls")),
     path("api/dashboard/", include("apps.dashboard.api_urls")),
     path("api/brain/", include("apps.brain.urls")),

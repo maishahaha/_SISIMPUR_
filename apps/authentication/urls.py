@@ -3,9 +3,9 @@ from . import views
 
 app_name = "auth"
 
+# Template-based signupin/verify-otp routes removed — React frontend handles UI.
+# Google OAuth and session logout remain server-side.
 urlpatterns = [
-    path("signupin/", views.signupin, name="signupin"),
-    path("verify-otp/", views.verify_otp, name="verify_otp"),
     path("send-otp/", views.send_otp_ajax, name="send_otp"),
     path("verify-otp-ajax/", views.verify_otp_ajax, name="verify_otp_ajax"),
     path("logout/", views.logout_view, name="logout"),

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.timezone import datetime
@@ -18,17 +17,6 @@ def is_valid_email(email):
     return email_validator.is_valid_check_01(
         email
     ) or email_validator.is_valid_check_02(email)
-
-
-def coming_soon(request):
-    return render(request, "coming_soon/coming_soon.html")
-
-
-def home(request):
-    """
-    View for the home page
-    """
-    return render(request, "home.html")
 
 
 @csrf_exempt
