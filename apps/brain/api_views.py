@@ -1,4 +1,5 @@
 from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny
@@ -12,7 +13,54 @@ from . import views as brain_views
     method="post",
     tags=["Brain - Document Processing"],
     operation_summary="Process document",
-    operation_description="Upload a document and generate questions.",
+    operation_description="Upload a PDF, image, or text file to generate Q&A pairs.",
+    manual_parameters=[
+        openapi.Parameter(
+            "document",
+            openapi.IN_FORM,
+            description="Document file to process (PDF, JPG, PNG, TXT)",
+            type=openapi.TYPE_FILE,
+            required=True,
+        ),
+        openapi.Parameter(
+            "num_questions",
+            openapi.IN_FORM,
+            description="Number of questions to generate (optional)",
+            type=openapi.TYPE_INTEGER,
+            required=False,
+        ),
+        openapi.Parameter(
+            "language",
+            openapi.IN_FORM,
+            description="Language of the document: auto | en | bn | ...",
+            type=openapi.TYPE_STRING,
+            required=False,
+            default="auto",
+        ),
+        openapi.Parameter(
+            "question_type",
+            openapi.IN_FORM,
+            description="Question type: MULTIPLECHOICE | SHORT",
+            type=openapi.TYPE_STRING,
+            required=False,
+            default="MULTIPLECHOICE",
+        ),
+    ],
+    responses={
+        200: openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "success": openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                "job_id": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "qa_count": openapi.Schema(type=openapi.TYPE_INTEGER),
+                "message": openapi.Schema(type=openapi.TYPE_STRING),
+            },
+        ),
+        400: openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={"success": openapi.Schema(type=openapi.TYPE_BOOLEAN), "error": openapi.Schema(type=openapi.TYPE_STRING)},
+        ),
+    },
 )
 @api_view(["POST"])
 @parser_classes([MultiPartParser, FormParser])
