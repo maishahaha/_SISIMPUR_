@@ -12,3 +12,5 @@ drf-yasg==1.21.8
 django-cors-headers==4.9.0
 supabase
 djangorestframework-simplejwt
+dj-database-url==2.3.0
+psycopg2-binary==2.9.10
