@@ -168,10 +168,20 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 # ---------------------------------------------------------------------------
 # Django REST Framework + Simple JWT
 # ---------------------------------------------------------------------------
+
+# Set API_REQUIRE_AUTH=true in environment to enforce JWT authentication on all API endpoints.
+# Defaults to False so all API endpoints are publicly accessible during development.
+API_REQUIRE_AUTH = os.getenv("API_REQUIRE_AUTH", "false").lower() == "true"
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated"
+        if API_REQUIRE_AUTH
+        else "rest_framework.permissions.AllowAny"
+    ],
 }
 
 SIMPLE_JWT = {

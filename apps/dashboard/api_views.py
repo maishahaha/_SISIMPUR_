@@ -1,8 +1,7 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.decorators import api_view, parser_classes, permission_classes
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
-from rest_framework.permissions import IsAuthenticated
 
 from . import views as dashboard_views
 
@@ -35,7 +34,6 @@ from . import views as dashboard_views
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def quiz_results(request, job_id):
     # Force JSON response through the existing view
     req = request._request
@@ -60,7 +58,6 @@ def quiz_results(request, job_id):
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def my_quizzes(request):
     """Return the user's processing jobs as JSON."""
     from apps.brain.models import ProcessingJob
@@ -122,7 +119,6 @@ def my_quizzes(request):
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def leaderboard(request):
     """JSON leaderboard endpoint (mirrors template logic)."""
     from django.contrib.auth.models import User
@@ -197,7 +193,6 @@ def leaderboard(request):
     },
 )
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 def start_exam(request, job_id):
     """Start an exam and return the new session_id as JSON instead of redirecting."""
     import uuid
@@ -259,7 +254,6 @@ def start_exam(request, job_id):
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def exam_session(request, session_id):
     """Return current exam state as JSON."""
     from django.http import JsonResponse
@@ -328,7 +322,6 @@ def exam_session(request, session_id):
     },
 )
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 @parser_classes([JSONParser])
 def answer_question(request, session_id):
     """Accept answer JSON and advance question index; return new state."""
@@ -404,7 +397,6 @@ def answer_question(request, session_id):
     },
 )
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 def submit_exam(request, session_id):
     """Complete the exam."""
     from django.http import JsonResponse
@@ -444,7 +436,6 @@ def submit_exam(request, session_id):
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def exam_result(request, session_id):
     """Return exam results as JSON."""
     from django.http import JsonResponse
@@ -523,7 +514,6 @@ def exam_result(request, session_id):
     },
 )
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 def start_flashcard(request, job_id):
     """Start flashcard session and return session_id as JSON."""
     import uuid
@@ -579,7 +569,6 @@ def start_flashcard(request, job_id):
     },
 )
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def flashcard_session(request, session_id):
     """Return current flashcard as JSON."""
     from django.http import JsonResponse
@@ -639,7 +628,6 @@ def flashcard_session(request, session_id):
     },
 )
 @api_view(["POST"])
-@permission_classes([IsAuthenticated])
 @parser_classes([JSONParser])
 def advance_flashcard(request, session_id):
     """Record progress and advance."""
