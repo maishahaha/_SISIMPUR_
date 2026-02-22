@@ -130,3 +130,8 @@ def health_check(request):
     """
     print("Health check endpoint accessed")
     return HttpResponse("OK", status=200)
+
+
+def backend_root(request):
+    """Return a simple message at the Django root to indicate the backend is running."""
+    return HttpResponse("Backend server running", status=200)
