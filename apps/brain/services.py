@@ -1,7 +1,7 @@
 import threading
 import logging
 from django.db import connection
-from apps.brain.api_processor import APIDocumentProcessor
+from apps.brain.processor import APIDocumentProcessor
 from apps.brain.models import ProcessingJob
 
 logger = logging.getLogger(__name__)

@@ -12,7 +12,7 @@ import json
 from .models import ExamSession, ShortAnswerEvaluation, ExamAnswer
 from .forms import ExamRequestForm
 from apps.utils import send_document_processing_success_webhook, send_document_processing_failed_webhook, send_exam_completion_webhook
-from apps.brain.api_service import APIService
+from apps.brain.provider import APIService
 
 @login_required(login_url='auth:signupin')
 def home(request):

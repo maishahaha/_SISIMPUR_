@@ -12,7 +12,7 @@ import logging
 import os
 from pathlib import Path
 from .models import ProcessingJob, QuestionAnswer
-from .api_processor import APIDocumentProcessor
+from .processor import APIDocumentProcessor
 
 
 logger = logging.getLogger("sisimpur.brain.views")

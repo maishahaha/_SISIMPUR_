@@ -3,7 +3,7 @@ import json
 import tempfile
 from django.test import TestCase, override_settings
 from django.utils import timezone
-from apps.brain.api_processor import APIDocumentProcessor
+from apps.brain.processor import APIDocumentProcessor
 
 
 class APIDocumentProcessorTests(TestCase):
